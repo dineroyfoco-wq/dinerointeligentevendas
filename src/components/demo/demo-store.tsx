@@ -70,7 +70,7 @@ function initial() {
       { id: "i8", nombre: "Crema de leche (litro)", stock: 9, minimo: 4, costo: 4.3 },
     ] as Producto[],
     metas: [
-      { id: "g1", nombre: "Ventas del mes", objetivo: 2500, actual: 0 },
+      { id: "g1", nombre: "Ventas del mes", objetivo: 4000, actual: 0 },
       { id: "g2", nombre: "Fondo para horno nuevo", objetivo: 1800, actual: 950 },
       { id: "g3", nombre: "Reserva de emergencia", objetivo: 1000, actual: 420 },
     ] as Meta[],
