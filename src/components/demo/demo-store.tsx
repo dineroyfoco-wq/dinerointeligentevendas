@@ -109,7 +109,7 @@ const DemoCtx = createContext<Ctx | null>(null);
 export function DemoProvider({ children }: { children: ReactNode }) {
   const [state, setState] = useState<State>(initial);
   const [currency, setCurrency] = useState("USD");
-  const c = CURRENCIES[currency] ?? CURRENCIES.USD!;
+  const c = CURRENCIES[currency] ?? CURRENCIES["USD"]!;
   const fmt = (n: number) =>
     `${n < 0 ? "-" : ""}${c.symbol} ${Math.abs(n).toLocaleString(c.locale, { minimumFractionDigits: c.dec, maximumFractionDigits: c.dec })}`;
 
