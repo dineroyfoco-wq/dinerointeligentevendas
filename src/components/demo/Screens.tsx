@@ -42,13 +42,13 @@ export function Dashboard() {
     const map = new Map<string, { mes: string; Ingresos: number; Gastos: number }>();
     for (const m of [...movs].sort((a, b) => a.fecha.localeCompare(b.fecha))) {
       const k = monthKey(m.fecha);
-      if (!map.has(k)) map.set(k, { mes: MESES[Number(k.slice(5)) - 1], Ingresos: 0, Gastos: 0 });
+      if (!map.has(k)) map.set(k, { mes: MESES[Number(k.slice(5)) - 1] ?? k, Ingresos: 0, Gastos: 0 });
       const r = map.get(k)!;
       m.tipo === "ingreso" ? (r.Ingresos += m.monto) : (r.Gastos += m.monto);
     }
     return [...map.values()].slice(-6);
   }, [movs]);
-  const meta = metas[0];
+  const meta = metas[0]!;
   const pct = Math.min(100, Math.round((t.ing / meta.objetivo) * 100));
   const alerts: string[] = [];
   const vc = cobrar.filter(isOverdue), vp = pagar.filter(isOverdue);

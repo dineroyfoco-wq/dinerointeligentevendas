@@ -32,7 +32,7 @@ function buildMovs(): Mov[] {
     const grow = 1 + (5 - m) * 0.06;
     for (let i = 0; i < 6; i++) {
       const day = Math.min(1 + i * 4, maxDay);
-      out.push({ id: `m${k++}`, tipo: "ingreso", monto: Math.round((260 + ((i * 97 + m * 31) % 220)) * grow), categoria: "Ventas", fecha: iso(new Date(base.getFullYear(), base.getMonth(), day)), desc: ventas[i % ventas.length] });
+      out.push({ id: `m${k++}`, tipo: "ingreso", monto: Math.round((260 + ((i * 97 + m * 31) % 220)) * grow), categoria: "Ventas", fecha: iso(new Date(base.getFullYear(), base.getMonth(), day)), desc: ventas[i % ventas.length]! });
     }
     gastos.forEach(([cat, desc, dbl], i) => {
       const day = Math.min(3 + i * 5, maxDay);
@@ -109,7 +109,7 @@ const DemoCtx = createContext<Ctx | null>(null);
 export function DemoProvider({ children }: { children: ReactNode }) {
   const [state, setState] = useState<State>(initial);
   const [currency, setCurrency] = useState("USD");
-  const c = CURRENCIES[currency];
+  const c = CURRENCIES[currency] ?? CURRENCIES.USD!;
   const fmt = (n: number) =>
     `${n < 0 ? "-" : ""}${c.symbol} ${Math.abs(n).toLocaleString(c.locale, { minimumFractionDigits: c.dec, maximumFractionDigits: c.dec })}`;
 
