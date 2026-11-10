@@ -84,7 +84,7 @@ const profiles = [
 
 const included = ["Los 11 módulos", "Alertas de cobros y pagos vencidos", "Selector de moneda", "Datos privados por usuario"];
 
-const faqs = [
+const faqs: [string, string][] = [
   ["¿Cómo recibo el acceso?", "Después de confirmar el pago recibirás por correo las instrucciones para entrar."],
   ["¿Qué diferencia hay con la planilla de Excel?", "Es el mismo método, ahora en un panel online: cálculos y alertas automáticas, y acceso desde cualquier dispositivo con tu correo y contraseña."],
   ["¿Funciona en el celular?", "Sí, desde el navegador de tu celular o de tu computadora, sin instalar nada."],

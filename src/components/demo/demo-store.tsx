@@ -32,7 +32,7 @@ function buildMovs(): Mov[] {
     const grow = 1 + (5 - m) * 0.06;
     for (let i = 0; i < 6; i++) {
       const day = Math.min(1 + i * 4, maxDay);
-      out.push({ id: `m${k++}`, tipo: "ingreso", monto: Math.round((260 + ((i * 97 + m * 31) % 220)) * grow), categoria: "Ventas", fecha: iso(new Date(base.getFullYear(), base.getMonth(), day)), desc: ventas[i % ventas.length] });
+      out.push({ id: `m${k++}`, tipo: "ingreso", monto: Math.round((260 + ((i * 97 + m * 31) % 220)) * grow), categoria: "Ventas", fecha: iso(new Date(base.getFullYear(), base.getMonth(), day)), desc: ventas[i % ventas.length]! });
     }
     gastos.forEach(([cat, desc, dbl], i) => {
       const day = Math.min(3 + i * 5, maxDay);
@@ -70,7 +70,7 @@ function initial() {
       { id: "i8", nombre: "Crema de leche (litro)", stock: 9, minimo: 4, costo: 4.3 },
     ] as Producto[],
     metas: [
-      { id: "g1", nombre: "Ventas del mes", objetivo: 2500, actual: 0 },
+      { id: "g1", nombre: "Ventas del mes", objetivo: 4000, actual: 0 },
       { id: "g2", nombre: "Fondo para horno nuevo", objetivo: 1800, actual: 950 },
       { id: "g3", nombre: "Reserva de emergencia", objetivo: 1000, actual: 420 },
     ] as Meta[],
@@ -109,7 +109,7 @@ const DemoCtx = createContext<Ctx | null>(null);
 export function DemoProvider({ children }: { children: ReactNode }) {
   const [state, setState] = useState<State>(initial);
   const [currency, setCurrency] = useState("USD");
-  const c = CURRENCIES[currency];
+  const c = CURRENCIES[currency] ?? CURRENCIES["USD"]!;
   const fmt = (n: number) =>
     `${n < 0 ? "-" : ""}${c.symbol} ${Math.abs(n).toLocaleString(c.locale, { minimumFractionDigits: c.dec, maximumFractionDigits: c.dec })}`;
 
