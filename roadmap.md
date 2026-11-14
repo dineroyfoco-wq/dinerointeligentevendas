@@ -1,0 +1,4 @@
+- [x] Atualizar os dois links Hotmart, mantendo os demais botões em #planes.
+- [x] Adicionar a prova social, a comparação e a lista de identificação em espanhol.
+- [x] Atualizar apenas o título principal e a resposta indicada no FAQ.
+- [x] Verificar testes, links, rastreamento e apresentação no celular e computador.

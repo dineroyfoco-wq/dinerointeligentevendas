@@ -91,7 +91,7 @@ const faqs: [string, string][] = [
   ["¿Mis datos son privados?", "Sí. Cada usuario ve únicamente sus propios datos."],
   ["¿Puedo usar mi moneda?", "Sí, puedes elegir la moneda que se muestra en tus módulos."],
   ["¿Puedo cancelar?", "Sí, puedes cancelar tu suscripción cuando quieras."],
-  ["¿Y si no sé de finanzas?", "No necesitas saber. Registras lo que entra y lo que sale, y el sistema hace las cuentas."],
+  ["¿Y si no sé de finanzas?", "No necesitas saber. Registras lo que entra y lo que sale, y el sistema hace las cuentas. Si sabes usar WhatsApp, sabes usar esta app."],
   ["¿Cómo funciona la garantía?", `Tienes ${DIAS_GARANTIA} días desde tu compra para solicitar la devolución de tu dinero.`],
 ];
 
@@ -129,7 +129,7 @@ function Index() {
               Sistema online para pequeños emprendedores
             </span>
             <h1 className="mt-5 text-3xl font-extrabold leading-[1.1] text-navy sm:text-5xl">
-              ¿Vendes, pero no sabes cuánto dinero te queda?
+              Deja de adivinar si tu negocio gana dinero: controla tus finanzas en un solo panel.
             </h1>
             <p className="mt-5 text-lg text-navy-soft">
               Dinero Inteligente es el panel online que calcula solo tu saldo, tus cobros y tus pagos, para que veas la salud de tu negocio desde el celular.
@@ -167,6 +167,17 @@ function Index() {
         </div>
       </section>
 
+      {/* Social proof */}
+      <section className="border-b border-grid bg-emerald-soft">
+        <div className="mx-auto flex max-w-5xl flex-col items-center gap-4 px-4 py-7 text-center sm:flex-row sm:gap-6 sm:text-left">
+          <div className="shrink-0 text-center">
+            <p className="font-display text-4xl font-extrabold text-emerald-dark">+80</p>
+            <p className="text-xs font-semibold text-emerald-dark">emprendedores</p>
+          </div>
+          <p className="font-semibold text-navy">Más de 80 emprendedores ya ordenaron sus finanzas con nuestra planilla. Ahora llega la versión app.</p>
+        </div>
+      </section>
+
       {/* Problem */}
       <section className="cv-auto px-4 py-16 sm:py-24">
         <div className="mx-auto max-w-5xl">
@@ -185,6 +196,53 @@ function Index() {
                 <p className="font-medium text-navy">{t}</p>
               </div>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Without / with comparison */}
+      <section className="cv-auto px-4 pb-16 sm:pb-24">
+        <div className="mx-auto max-w-5xl">
+          <SectionTitle title="Sin / Con el Centro de Control" />
+          <div className="grid gap-4 sm:grid-cols-2">
+            <div className="rounded-2xl border border-destructive/20 bg-destructive/5 p-6">
+              <h3 className="flex items-start gap-3 text-lg font-bold text-navy">
+                <X className="mt-0.5 h-6 w-6 shrink-0 text-destructive" />
+                Sin el Centro de Control
+              </h3>
+              <ul className="mt-5 space-y-4">
+                {[
+                  "Dinero que desaparece sin saber en qué",
+                  "Clientes que no pagan y se te olvida cobrar",
+                  "Pagos que te sorprenden",
+                  "Compras de stock «a ojo»",
+                  "Decisiones por intuición",
+                ].map((item) => (
+                  <li key={item} className="flex items-start gap-3 text-sm text-navy">
+                    <X className="mt-0.5 h-4 w-4 shrink-0 text-destructive" /> {item}
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <div className="rounded-2xl border border-emerald bg-emerald-soft p-6">
+              <h3 className="flex items-start gap-3 text-lg font-bold text-navy">
+                <Check className="mt-0.5 h-6 w-6 shrink-0 text-emerald-dark" />
+                Con el Centro de Control
+              </h3>
+              <ul className="mt-5 space-y-4">
+                {[
+                  "Saldo real y claro todos los días",
+                  "Alertas automáticas de cobros vencidos",
+                  "Aviso de pagos próximos",
+                  "Alertas de inventario mínimo",
+                  "Indicadores de margen, liquidez y rotación",
+                ].map((item) => (
+                  <li key={item} className="flex items-start gap-3 text-sm text-navy">
+                    <Check className="mt-0.5 h-4 w-4 shrink-0 text-emerald-dark" /> {item}
+                  </li>
+                ))}
+              </ul>
+            </div>
           </div>
         </div>
       </section>
@@ -263,6 +321,26 @@ function Index() {
               </div>
             ))}
           </div>
+        </div>
+      </section>
+
+      {/* This is for you */}
+      <section className="cv-auto px-4 pt-16 sm:pt-24">
+        <div className="mx-auto max-w-5xl">
+          <SectionTitle title="Esto es para ti si…" />
+          <ul className="space-y-4">
+            {[
+              "Tienes un negocio pequeño o emprendimiento y mezclas el dinero personal con el del negocio.",
+              "Vendes y no sabes cuánto ganas realmente al final del mes.",
+              "Te olvidas de cobrar o de pagar a tiempo.",
+              "Usas cuadernos, notas del celular o planillas que nunca terminas de llenar.",
+              "Quieres tomar decisiones con números, sin ser experto en finanzas.",
+            ].map((item) => (
+              <li key={item} className="flex items-start gap-3 font-medium text-navy">
+                <Check className="mt-0.5 h-5 w-5 shrink-0 text-emerald-dark" /> {item}
+              </li>
+            ))}
+          </ul>
         </div>
       </section>
 
