@@ -13,7 +13,7 @@ import { useEffect, type ReactNode } from "react";
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
 import { META_PIXEL_ID } from "../lib/config";
-import { initPixel } from "../lib/pixel";
+import { PIXEL_BOOTSTRAP } from "../lib/pixel-bootstrap";
 
 const GOOGLE_FONTS_URL = "https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Sora:wght@700;800&display=swap";
 
@@ -100,6 +100,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
     ],
     scripts: [
+      { id: "meta-pixel-base", children: PIXEL_BOOTSTRAP },
       {
         id: "nonblocking-google-fonts",
         children: `(function(){if(document.getElementById('google-fonts'))return;var link=document.createElement('link');link.id='google-fonts';link.rel='stylesheet';link.media='print';link.href=${JSON.stringify(GOOGLE_FONTS_URL)};link.onload=function(){this.media='all';};document.head.appendChild(link);})();`,
@@ -122,14 +123,9 @@ function RootShell({ children }: { children: ReactNode }) {
         </noscript>
       </head>
       <body>
+        {/* No-JS visitors cannot resolve country safely: keep the fallback inert. */}
         <noscript>
-          <img
-            height="1"
-            width="1"
-            style={{ display: "none" }}
-            alt=""
-            src={`https://www.facebook.com/tr?id=${META_PIXEL_ID}&ev=PageView&noscript=1`}
-          />
+          <template><img height="1" width="1" alt="" src={`https://www.facebook.com/tr?id=${META_PIXEL_ID}&ev=PageView&noscript=1`} /></template>
         </noscript>
         {children}
         <Scripts />
@@ -140,9 +136,6 @@ function RootShell({ children }: { children: ReactNode }) {
 
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
-  useEffect(() => {
-    initPixel();
-  }, []);
 
   return (
     <QueryClientProvider client={queryClient}>

@@ -12,7 +12,8 @@ import { CashFlowMockup, DashboardMockup } from "@/components/landing/Mockups";
 import {
   DIAS_GARANTIA, HOTMART_URL_ANUAL, HOTMART_URL_MENSUAL, PRECIO_ANUAL, PRECIO_MENSUAL,
 } from "@/lib/config";
-import { track } from "@/lib/pixel";
+import { track, trackPlan } from "@/lib/pixel";
+import { useSalesTracking } from "@/hooks/use-sales-tracking";
 
 const TITLE = "Dinero Inteligente | Control del dinero de tu negocio, online";
 const DESC = `Panel online para pequeños emprendedores: flujo de caja, cobros, pagos, inventario, metas e indicadores en un solo lugar. Prueba la demo gratis. Garantía de ${DIAS_GARANTIA} días.`;
@@ -35,7 +36,7 @@ export const Route = createFileRoute("/")({
 
 function Cta({ href = "#planes", children }: { href?: string; children: React.ReactNode }) {
   return (
-    <a href={href} className="btn-cta">
+    <a href={href} onClick={() => track("ClickVerPlanes", undefined, true)} className="btn-cta">
       {children} <ArrowRight className="h-4 w-4" />
     </a>
   );
@@ -96,6 +97,7 @@ const faqs: [string, string][] = [
 ];
 
 function Index() {
+  useSalesTracking();
   const [showBar, setShowBar] = useState(false);
   useEffect(() => {
     const onScroll = () => setShowBar(window.scrollY > 650);
@@ -115,7 +117,7 @@ function Index() {
             </span>
             Dinero Inteligente
           </a>
-          <a href="#planes" className="rounded-full bg-navy px-4 py-2 text-sm font-bold text-primary-foreground">
+          <a href="#planes" onClick={() => track("ClickVerPlanes", undefined, true)} className="rounded-full bg-navy px-4 py-2 text-sm font-bold text-primary-foreground">
             Ver planes
           </a>
         </div>
@@ -139,7 +141,7 @@ function Index() {
             </p>
             <div className="mt-7 flex flex-col gap-3 sm:flex-row">
               <Cta>Ver planes</Cta>
-              <Link to="/demo" className="btn-ghost-cta">
+              <Link to="/demo" onClick={() => track("DemoClick", undefined, true)} className="btn-ghost-cta">
                 <PlayCircle className="h-4 w-4" /> Probar la demo gratis
               </Link>
             </div>
@@ -299,7 +301,7 @@ function Index() {
             Entra a una cuenta de ejemplo de un negocio ficticio y mira cómo funciona por dentro.
           </p>
           <div className="mt-7">
-            <Link to="/demo" className="btn-cta">Abrir la demo <ArrowRight className="h-4 w-4" /></Link>
+            <Link to="/demo" onClick={() => track("DemoClick", undefined, true)} className="btn-cta">Abrir la demo <ArrowRight className="h-4 w-4" /></Link>
           </div>
           <div className="mx-auto mt-8 max-w-md"><CashFlowMockup /></div>
           <p className="mt-3 text-xs font-semibold text-emerald-dark">Datos ficticios · No se guarda nada</p>
@@ -408,7 +410,7 @@ function Index() {
                   href={p.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  onClick={() => track("InitiateCheckout")}
+                  onClick={() => trackPlan(p.name === "Plan mensual" ? "mensual" : "anual")}
                   className="btn-cta mt-auto"
                 >
                   {p.cta} <ArrowRight className="h-4 w-4" />
@@ -468,7 +470,7 @@ function Index() {
 
       {/* Mobile sticky bar */}
       <div className={`fixed inset-x-0 bottom-0 z-40 flex items-center gap-3 border-t border-grid bg-background p-3 transition-transform md:hidden ${showBar ? "translate-y-0" : "translate-y-full"}`}>
-        <a href="#planes" className="btn-cta flex-1 !py-3">Ver planes <ArrowRight className="h-4 w-4" /></a>
+        <a href="#planes" onClick={() => track("ClickVerPlanes", undefined, true)} className="btn-cta flex-1 !py-3">Ver planes <ArrowRight className="h-4 w-4" /></a>
         <span className="flex items-center gap-1 text-xs font-bold text-emerald-dark">
           <ShieldCheck className="h-4 w-4" /> Garantía {DIAS_GARANTIA} días
         </span>

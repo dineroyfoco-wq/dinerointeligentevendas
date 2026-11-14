@@ -6,7 +6,7 @@ import {
 } from "lucide-react";
 import { CURRENCIES, DemoProvider, useDemo } from "@/components/demo/demo-store";
 import { Cuentas, Dashboard, FlujoCaja, Inventario, Locked, Metas } from "@/components/demo/Screens";
-import { track } from "@/lib/pixel";
+import { useSalesTracking } from "@/hooks/use-sales-tracking";
 
 const TITLE = "Demo de Dinero Inteligente — Pruébalo sin registrarte";
 const DESC = "Explora una cuenta de ejemplo con datos ficticios: dashboard, flujo de caja, cobros, pagos, inventario y metas.";
@@ -40,10 +40,7 @@ const MENU = [
 ];
 
 function DemoPage() {
-  useEffect(() => {
-    const t = setTimeout(() => track("DemoIniciada", true), 1500);
-    return () => clearTimeout(t);
-  }, []);
+  useSalesTracking(true);
   return (
     <DemoProvider>
       <Shell />
