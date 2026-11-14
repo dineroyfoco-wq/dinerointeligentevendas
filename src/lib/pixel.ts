@@ -16,6 +16,6 @@ export function trackOnce(key: string, event: string, params?: Record<string, un
   if (track(event, params, custom)) sent.add(key);
 }
 export function trackPlan(plan: 'mensual' | 'anual') {
-  track('InitiateCheckout', { content_name: plan === 'mensual' ? 'Plan mensual' : 'Plan anual', value: plan === 'mensual' ? 4.9 : 59, currency: 'USD' });
+  track('InitiateCheckout', { content_name: plan === 'mensual' ? 'Plan mensual' : 'Plan anual', value: plan === 'mensual' ? 4.9 : 49.9, currency: 'USD' });
   track(plan === 'mensual' ? 'ClickPlanMensual' : 'ClickPlanAnual', undefined, true);
 }
