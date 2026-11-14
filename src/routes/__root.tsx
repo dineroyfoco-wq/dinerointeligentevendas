@@ -15,7 +15,6 @@ import { reportLovableError } from "../lib/lovable-error-reporting";
 import { META_PIXEL_ID } from "../lib/config";
 import { PIXEL_BOOTSTRAP } from "../lib/pixel-bootstrap";
 
-const GOOGLE_FONTS_URL = "https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Sora:wght@700;800&display=swap";
 
 function NotFoundComponent() {
   return (
@@ -96,15 +95,9 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
         href: appCss,
       },
       { rel: "icon", href: "/favicon.ico", type: "image/x-icon" },
-      { rel: "preconnect", href: "https://fonts.googleapis.com" },
-      { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
     ],
     scripts: [
       { id: "meta-pixel-base", children: PIXEL_BOOTSTRAP },
-      {
-        id: "nonblocking-google-fonts",
-        children: `(function(){if(document.getElementById('google-fonts'))return;var link=document.createElement('link');link.id='google-fonts';link.rel='stylesheet';link.media='print';link.href=${JSON.stringify(GOOGLE_FONTS_URL)};link.onload=function(){this.media='all';};document.head.appendChild(link);})();`,
-      },
     ],
   }),
   shellComponent: RootShell,
@@ -118,9 +111,6 @@ function RootShell({ children }: { children: ReactNode }) {
     <html lang="es">
       <head>
         <HeadContent />
-        <noscript>
-          <link rel="stylesheet" href={GOOGLE_FONTS_URL} />
-        </noscript>
       </head>
       <body>
         {/* No-JS visitors cannot resolve country safely: keep the fallback inert. */}
