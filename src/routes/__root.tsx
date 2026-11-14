@@ -15,6 +15,8 @@ import { reportLovableError } from "../lib/lovable-error-reporting";
 import { META_PIXEL_ID } from "../lib/config";
 import { initPixel } from "../lib/pixel";
 
+const GOOGLE_FONTS_URL = "https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Sora:wght@700;800&display=swap";
+
 function NotFoundComponent() {
   return (
     <div className="flex min-h-screen items-center justify-center bg-background px-4">
@@ -96,9 +98,11 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { rel: "icon", href: "/favicon.ico", type: "image/x-icon" },
       { rel: "preconnect", href: "https://fonts.googleapis.com" },
       { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
+    ],
+    scripts: [
       {
-        rel: "stylesheet",
-        href: "https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Sora:wght@600;700;800&display=swap",
+        id: "nonblocking-google-fonts",
+        children: `(function(){if(document.getElementById('google-fonts'))return;var link=document.createElement('link');link.id='google-fonts';link.rel='stylesheet';link.media='print';link.href=${JSON.stringify(GOOGLE_FONTS_URL)};link.onload=function(){this.media='all';};document.head.appendChild(link);})();`,
       },
     ],
   }),
@@ -113,6 +117,9 @@ function RootShell({ children }: { children: ReactNode }) {
     <html lang="es">
       <head>
         <HeadContent />
+        <noscript>
+          <link rel="stylesheet" href={GOOGLE_FONTS_URL} />
+        </noscript>
       </head>
       <body>
         <noscript>

@@ -28,3 +28,5 @@ use the editor.
   own key and store it in Secrets.
 - **Secrets.** Lovable manages them. Do not put secret values in the repo.
 <!-- LOVABLE:END -->
+
+- Load external font styles through a guarded head script using print media and an onload media switch, with a noscript stylesheet fallback; this keeps text paint independent of external font responses and React hydration.

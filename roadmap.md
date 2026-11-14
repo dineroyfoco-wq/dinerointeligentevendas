@@ -2,3 +2,5 @@
 - [x] Adicionar a prova social, a comparação e a lista de identificação em espanhol.
 - [x] Atualizar apenas o título principal e a resposta indicada no FAQ.
 - [x] Verificar testes, links, rastreamento e apresentação no celular e computador.
+- [ ] Antecipar o pixel sem duplicação — aguarda escolha de consentimento: aviso regional ou não medir nessas regiões.
+- [x] Carregar fontes sem bloquear a renderização e verificar o navegador e testes.
